@@ -22,8 +22,6 @@ All text above, and the splash screen must be included in any redistribution
 
 #define SSD1327_I2C_ADDRESS 0x3D
 
-
-
 #define SSD1305_SETBRIGHTNESS 0x82
 
 #define SSD1327_SETCOLUMN 0x15
@@ -56,8 +54,6 @@ All text above, and the splash screen must be included in any redistribution
 #define SSD1327_FUNCSELB 0xD5
 
 #define SSD1327_CMDLOCK 0xFD
-
-
 
 /*! The controller object for SSD1327 OLED displays */
 class Adafruit_SSD1327 : public Adafruit_GrayOLED {

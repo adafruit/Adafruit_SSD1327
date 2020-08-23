@@ -56,7 +56,7 @@ redistribution
 Adafruit_SSD1327::Adafruit_SSD1327(uint16_t w, uint16_t h, TwoWire *twi,
                                    int8_t rst_pin, uint32_t clkDuring,
                                    uint32_t clkAfter)
-  : Adafruit_GrayOLED(4, w, h, twi, rst_pin, clkDuring, clkAfter) {}
+    : Adafruit_GrayOLED(4, w, h, twi, rst_pin, clkDuring, clkAfter) {}
 
 /*!
     @brief  Constructor for SPI SSD1327 displays, using software (bitbang)
@@ -87,7 +87,7 @@ Adafruit_SSD1327::Adafruit_SSD1327(uint16_t w, uint16_t h, TwoWire *twi,
 Adafruit_SSD1327::Adafruit_SSD1327(uint16_t w, uint16_t h, int8_t mosi_pin,
                                    int8_t sclk_pin, int8_t dc_pin,
                                    int8_t rst_pin, int8_t cs_pin)
-  : Adafruit_GrayOLED(4, w, h, mosi_pin, sclk_pin, dc_pin, rst_pin, cs_pin) {}
+    : Adafruit_GrayOLED(4, w, h, mosi_pin, sclk_pin, dc_pin, rst_pin, cs_pin) {}
 
 /*!
     @brief  Constructor for SPI SSD1327 displays, using native hardware SPI.
@@ -117,7 +117,7 @@ Adafruit_SSD1327::Adafruit_SSD1327(uint16_t w, uint16_t h, int8_t mosi_pin,
 Adafruit_SSD1327::Adafruit_SSD1327(uint16_t w, uint16_t h, SPIClass *spi,
                                    int8_t dc_pin, int8_t rst_pin, int8_t cs_pin,
                                    uint32_t bitrate)
-  : Adafruit_GrayOLED(4, w, h, spi, dc_pin, rst_pin, cs_pin, bitrate) {}
+    : Adafruit_GrayOLED(4, w, h, spi, dc_pin, rst_pin, cs_pin, bitrate) {}
 
 /*!
     @brief  Destructor for Adafruit_SSD1327 object.
@@ -160,52 +160,50 @@ bool Adafruit_SSD1327::begin(uint8_t addr, bool reset) {
   // Init sequence, make sure its under 32 bytes, or split into multiples!
   static const uint8_t init_128x128[] = {
       // Init sequence for 128x32 OLED module
-      SSD1327_DISPLAYOFF,          // 0xAE
+      SSD1327_DISPLAYOFF, // 0xAE
       SSD1327_SETCONTRAST,
-      0x80, // 0x81, 0x80
+      0x80,             // 0x81, 0x80
       SSD1327_SEGREMAP, // 0xA0 0x53
       0x51, // remap memory, odd even columns, com flip and column swap
-      SSD1327_SETSTARTLINE, 
+      SSD1327_SETSTARTLINE,
       0x00, // 0xA1, 0x00
       SSD1327_SETDISPLAYOFFSET,
       0x00, // 0xA2, 0x00
-      SSD1327_DISPLAYALLOFF,
-      SSD1327_SETMULTIPLEX,
+      SSD1327_DISPLAYALLOFF, SSD1327_SETMULTIPLEX,
       0x7F, // 0xA8, 0x7F (1/64)
       SSD1327_PHASELEN,
       0x11, // 0xB1, 0x11
       /*
       SSD1327_GRAYTABLE,
-      0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 
+      0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06,
       0x07, 0x08, 0x10, 0x18, 0x20, 0x2f, 0x38, 0x3f,
       */
       SSD1327_DCLK,
       0x00, // 0xb3, 0x00 (100hz)
       SSD1327_REGULATOR,
       0x01, // 0xAB, 0x01
-      SSD1327_PRECHARGE2, 
+      SSD1327_PRECHARGE2,
       0x04, // 0xB6, 0x04
-      SSD1327_SETVCOM, 
+      SSD1327_SETVCOM,
       0x0F, // 0xBE, 0x0F
-      SSD1327_PRECHARGE, 
+      SSD1327_PRECHARGE,
       0x08, // 0xBC, 0x08
       SSD1327_FUNCSELB,
       0x62, // 0xD5, 0x62
       SSD1327_CMDLOCK,
       0x12, // 0xFD, 0x12
-      SSD1327_NORMALDISPLAY,
-      SSD1327_DISPLAYON};
- 
+      SSD1327_NORMALDISPLAY, SSD1327_DISPLAYON};
+
   page_offset = 0;
   if (!oled_commandList(init_128x128, sizeof(init_128x128))) {
     return false;
-    }
+  }
 
   delay(100);                      // 100ms delay recommended
   oled_command(SSD1327_DISPLAYON); // 0xaf
   setContrast(0x2F);
 
-  //memset(buffer, 0x81, _bpp * WIDTH * ((HEIGHT + 7) / 8));
+  // memset(buffer, 0x81, _bpp * WIDTH * ((HEIGHT + 7) / 8));
 
   return true; // Success
 }
@@ -227,7 +225,7 @@ void Adafruit_SSD1327::display(void) {
   uint8_t dc_byte = 0x40;
   uint8_t rows = HEIGHT;
 
-  uint8_t bytes_per_row = WIDTH/2;  // See fig 10-1 (64 bytes, 128 pixels)
+  uint8_t bytes_per_row = WIDTH / 2; // See fig 10-1 (64 bytes, 128 pixels)
   uint8_t maxbuff = 128;
 
   /*
@@ -242,12 +240,13 @@ void Adafruit_SSD1327::display(void) {
   Serial.println(")");
   */
 
-  int16_t row_start = min((int16_t)bytes_per_row-1, window_x1/2);
-  int16_t row_end = max((int16_t)0, window_x2/2);
+  int16_t row_start =
+      min((int16_t)(bytes_per_row - 1), (int16_t)(window_x1 / 2));
+  int16_t row_end = max((int16_t)0, (int16_t)(window_x2 / 2));
 
-  int16_t first_row =  min((int16_t)rows-1, window_y1);
-  int16_t last_row = max((int16_t)0, window_y2);
-  
+  int16_t first_row = min((int16_t)(rows - 1), (int16_t)window_y1);
+  int16_t last_row = max((int16_t)0, (int16_t)window_y2);
+
   /*
   Serial.print("Rows: ");
   Serial.print(first_row);
@@ -266,16 +265,15 @@ void Adafruit_SSD1327::display(void) {
     maxbuff = i2c_dev->maxBufferSize() - 1;
   }
 
-  uint8_t cmd[] = {SSD1327_SETROW, first_row, last_row, 
+  uint8_t cmd[] = {SSD1327_SETROW,    first_row, last_row,
                    SSD1327_SETCOLUMN, row_start, row_end};
   oled_commandList(cmd, sizeof(cmd));
 
   for (uint8_t row = first_row; row <= last_row; row++) {
-    uint8_t bytes_remaining = row_end-row_start+1;
+    uint8_t bytes_remaining = row_end - row_start + 1;
     ptr = buffer + (uint16_t)row * (uint16_t)bytes_per_row;
     // fast forward to dirty rectangle beginning
     ptr += row_start;
-
 
     while (bytes_remaining) {
       uint8_t to_write = min(bytes_remaining, maxbuff);
@@ -302,7 +300,6 @@ void Adafruit_SSD1327::display(void) {
   window_x2 = -1;
   window_y2 = -1;
 }
-
 
 /*!
     @brief  Enable or disable display invert mode (white-on-black vs
