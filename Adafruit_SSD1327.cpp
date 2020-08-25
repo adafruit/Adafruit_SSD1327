@@ -307,7 +307,6 @@ void Adafruit_SSD1327::display(void) {
     @param  i
             If true, switch to invert mode (black-on-white), else normal
             mode (white-on-black).
-    @return None (void).
 */
 void Adafruit_SSD1327::invertDisplay(bool i) {
   oled_command(i ? SSD1327_INVERTDISPLAY : SSD1327_NORMALDISPLAY);
