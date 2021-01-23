@@ -1,16 +1,19 @@
-# Adafruit SSD1327 [![Build Status](https://github.com/adafruit/Adafruit_SSD1327/workflows/Arduino%20Library%20CI/badge.svg)](https://github.com/adafruit/Adafruit_SSD1327/actions)[![Documentation](https://github.com/adafruit/ci-arduino/blob/master/assets/doxygen_badge.svg)](http://adafruit.github.io/Adafruit_SSD1327/html/index.html)
+# SSD1322 for Adafruit GFX Library
 
-This is the Adafruit SSD1327 Arduino Library for Arduino
-Tested and works great with the Adafruit SSD1327 Breakout Board
+A quick implementation for SSD1322-based 256x64 OLED displays.
 
-[<img src="https://cdn-shop.adafruit.com/1200x900/4741-07.jpg" width="500px">](https://www.adafruit.com/?q=monochrome%20oled)
+Based upon the [Adafruit SD1327 driver](https://github.com/adafruit/Adafruit_SSD1327).
 
-These displays use I2C or SPI to communicate
+⚠️ Until merged into main library, requires a
+[forked version](https://github.com/jordanh/Adafruit-GFX-Library)
+of the Adafruit GFX Library (see below).
+
+These displays use I2C or SPI to communicate.
 
 Adafruit invests time and resources providing this open source code, please support Adafruit and open-source hardware by purchasing products from Adafruit!
 
 # Installation
-To install, use the Arduino Library Manager and search for "Adafruit SSD1327" and install the library.
+Checkout this repository to your Arduino library directory.
 
 ## Dependencies
  * [Adafruit GFX Library](https://github.com/adafruit/Adafruit-GFX-Library)
@@ -46,6 +49,16 @@ Note that the formatting output by `clang-format` is what the automated formatti
   * [Documentation and IDE integration](https://clang.llvm.org/docs/ClangFormat.html)
 
 ## About this Driver
-Written by Limor Fried for Adafruit Industries.
+
+Written by Jordan Husney for personal use.
+
+Based upon code by Limor Fried for Adafruit Industries.
+
 BSD license, check license.txt for more information
 All text above must be included in any redistribution
+
+### Why the fork of Adafruit GFX?
+The original implementation of [Adafruit_GrayOLED::oled_commandList(...)](https://github.com/adafruit/Adafruit-GFX-Library/blob/d9220ba7d3cb49915f6aca0feef680e3fed0c400/Adafruit_GrayOLED.cpp#L186)
+does not handle toggling the D/C line when display arguments are used. This driver depends on a new method
+called `oled_commandAndArgsList(...)`. If you do not desire using a forked version of Adafruit GFX, you may
+add this method to the `Adafruit_SSD1322` class.
