@@ -220,7 +220,7 @@ void Adafruit_SSD1327::display(void) {
   // 32-byte transfer condition below.
   yield();
 
-  uint16_t count = WIDTH * ((HEIGHT + 7) / 8);
+  // uint16_t count = WIDTH * ((HEIGHT + 7) / 8);
   uint8_t *ptr = buffer;
   uint8_t dc_byte = 0x40;
   uint8_t rows = HEIGHT;
