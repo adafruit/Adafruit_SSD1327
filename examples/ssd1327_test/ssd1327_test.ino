@@ -233,7 +233,7 @@ void testdrawtriangle(void) {
 }
 
 void testfilltriangle(void) {
-  uint8_t color = SSD1327_WHITE;
+  // uint8_t color = SSD1327_WHITE;
   for (int16_t i=min(display.width(),display.height())/2; i>0; i-=5) {
     display.fillTriangle(display.width()/2, display.height()/2-i,
                      display.width()/2-i, display.height()/2+i,
@@ -250,7 +250,7 @@ void testdrawroundrect(void) {
 }
 
 void testfillroundrect(void) {
-  uint8_t color = SSD1327_WHITE;
+  // uint8_t color = SSD1327_WHITE;
   for (uint8_t i=0; i<display.height()/3-2; i+=2) {
     display.fillRoundRect(i, i, display.width()-2*i, display.height()-2*i, display.height()/4,  i % 15 + 1);
     display.display();
