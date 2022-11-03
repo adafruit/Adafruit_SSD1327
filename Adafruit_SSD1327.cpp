@@ -265,8 +265,8 @@ void Adafruit_SSD1327::display(void) {
     maxbuff = i2c_dev->maxBufferSize() - 1;
   }
 
-  uint8_t cmd[] = {SSD1327_SETROW,    first_row, last_row,
-                   SSD1327_SETCOLUMN, row_start, row_end};
+  uint8_t cmd[] = {SSD1327_SETROW,    (uint8_t)first_row, (uint8_t)last_row,
+                   SSD1327_SETCOLUMN, (uint8_t)row_start, (uint8_t)row_end};
   oled_commandList(cmd, sizeof(cmd));
 
   for (uint8_t row = first_row; row <= last_row; row++) {

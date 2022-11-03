@@ -170,14 +170,14 @@ void testdrawbitmap(const uint8_t *bitmap, uint8_t w, uint8_t h) {
   while (1) {
     // draw each icon
     for (uint8_t f=0; f< NUMFLAKES; f++) {
-      display.drawBitmap(icons[f][XPOS], icons[f][YPOS], logo16_glcd_bmp, w, h, f+1);
+      display.drawBitmap(icons[f][XPOS], icons[f][YPOS], bitmap, w, h, f+1);
     }
     display.display();
     delay(200);
     
     // then erase it + move it
     for (uint8_t f=0; f< NUMFLAKES; f++) {
-      display.drawBitmap(icons[f][XPOS], icons[f][YPOS],  logo16_glcd_bmp, w, h, SSD1327_BLACK);
+      display.drawBitmap(icons[f][XPOS], icons[f][YPOS],  bitmap, w, h, SSD1327_BLACK);
       // move it
       icons[f][YPOS] += icons[f][DELTAY];
       // if its gone, reinit
