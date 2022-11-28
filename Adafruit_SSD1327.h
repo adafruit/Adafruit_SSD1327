@@ -72,6 +72,7 @@ public:
   bool begin(uint8_t i2caddr = SSD1327_I2C_ADDRESS, bool reset = true);
   void display();
   void invertDisplay(bool i);
+  void screenSaver(bool i);
 
 private:
   int8_t page_offset = 0;

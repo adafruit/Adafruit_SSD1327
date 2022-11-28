@@ -311,3 +311,16 @@ void Adafruit_SSD1327::display(void) {
 void Adafruit_SSD1327::invertDisplay(bool i) {
   oled_command(i ? SSD1327_INVERTDISPLAY : SSD1327_NORMALDISPLAY);
 }
+
+/*!
+    @brief  Enable or disable the screensaver. While the screensaver
+            is enabled, all updating of the display buffer continues, so
+            when the screensaver is disabled, the display shows the
+            then-current state of the buffer.
+    @param  i
+            If true, enable the screensaver (an all-black display). If
+            false, disable it.
+*/
+void Adafruit_SSD1327::screenSaver(bool i) {
+  oled_command(i ? SSD1327_DISPLAYALLOFF : SSD1327_NORMALDISPLAY);
+}
